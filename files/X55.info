@@ -1,0 +1,83 @@
+{
+ "name": "X55",
+ "type": "module",
+ "description": "Defender X55",
+ "version": "0.0.1",
+ "homepage": "",
+ "files": ["X55.init", "X55.info", "X55.lua", "X55.run", "X55_dark.html", "X55_light.html"],
+ "page": ["X55_light.html"],
+ "repository": {
+  "type": "git",
+  "url": "https://github.com/bondrogeen/Defender_X55"
+ },
+ "keywords": ["esp8266", "lua", "nodemcu", "PT2313"],
+ "author": {
+  "name": "bondrogeen",
+  "email": "bondrogeen@gmail.com"
+ },
+ "native": [
+  {
+   "id": "run",
+   "val": false,
+   "type": "checkbox",
+   "name": "Run"
+  }, {
+   "id": "input",
+   "val": 3,
+   "type": "select",
+   "values": [3],
+   "name": "Input"
+  }, {
+   "id": "volume",
+   "val": 20,
+   "type": "number",
+   "min": 0,
+   "max": 63,
+   "name": "Volume"
+  }, {
+   "id": "left",
+   "val": 20,
+   "type": "number",
+   "min": 0,
+   "max": 31,
+   "name": "Left"
+  }, {
+   "id": "right",
+   "val": 20,
+   "type": "number",
+   "min": 0,
+   "max": 31,
+   "index": 3,
+   "name": "Right"
+  }, {
+   "id": "subwoofer",
+   "val": 20,
+   "type": "number",
+   "min": 0,
+   "max": 31,
+   "name": "Subwooferr"
+  }, {
+   "id": "bass",
+   "val": 7,
+   "type": "number",
+   "min": 0,
+   "max": 15,
+   "name": "Bass"
+  }, {
+   "id": "treble",
+   "val": 7,
+   "type": "number",
+   "min": 0,
+   "max": 15,
+   "name": "Treble"
+  }, {
+   "id": "mute",
+   "val": 0,
+   "values": [0, 1],
+   "type": "select",
+   "name": "Mute"
+  }
+ ],
+ "license": "MIT",
+ "modules": ["file", "gpio", "sjson", "i2c"]
+}

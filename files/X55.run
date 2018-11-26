@@ -1,0 +1,16 @@
+return function (s)
+ local r
+ if s.run then
+ print("Module X55 is run")
+   gpio.mode(2, gpio.OUTPUT)
+   gpio.write(2, s.mute) 
+   print(i2c.setup(0, 4, 3, i2c.SLOW))
+  local mytimer = tmr.create()
+  mytimer:register(1000, tmr.ALARM_SINGLE, function (t)
+   dofile("X55.lua")(s)
+  end)
+  mytimer:start()
+  r=true
+ end
+ return r
+end
