@@ -6,7 +6,7 @@ local function set(val)
  return r
 end
 local function save(m,v)
-local f,o,j="X55.init"
+local f,o,j="Defender_X55.init"
 if file.open(f,"r") then
  o,j=pcall(sjson.decode,file.read())
  j[m]=v
@@ -51,15 +51,15 @@ local function sort(m,v)
    r = set(127+8-v)
   end
  end
- if r then save(m,v)end
+ if r then save(m,v)if _M then _M:pub("info/Defender_X55/"..m,v)end end
  return r
 end
 
 return function (t)
- local x = ""
+ local x,d,r = {}
   for k,v in pairs(t) do
-   x=x..k.."="..tostring(sort(k,v))..","
+   d=sort(k,v)
+   if d then x[k]=d r=1 end
   end
-   x=x:sub(0,#x-1)
- return x
+ return r and x
 end

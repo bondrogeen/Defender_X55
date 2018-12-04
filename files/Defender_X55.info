@@ -1,11 +1,11 @@
 {
- "name": "X55",
- "type": "module",
+ "name": "Defender_X55",
+ "type": "plugin",
  "description": "Defender X55",
- "version": "0.0.1",
+ "version": "0.0.2",
  "homepage": "",
- "files": ["X55.init", "X55.info", "X55.lua", "X55.run", "X55_dark.html", "X55_light.html"],
- "page": ["X55_light.html"],
+ "files": ["Defender_X55.init", "Defender_X55.info", "Defender_X55.lua","Defender_X55.mqtt", "Defender_X55_comm.lua", "Defender_X55_ir.lua", "Defender_X55.run", "Defender_X55_light.html"],
+ "page": ["Defender_X55_light.html"],
  "repository": {
   "type": "git",
   "url": "https://github.com/bondrogeen/Defender_X55"
@@ -50,13 +50,6 @@
    "index": 3,
    "name": "Right"
   }, {
-   "id": "subwoofer",
-   "val": 20,
-   "type": "number",
-   "min": 0,
-   "max": 31,
-   "name": "Subwooferr"
-  }, {
    "id": "bass",
    "val": 7,
    "type": "number",
@@ -70,6 +63,13 @@
    "min": 0,
    "max": 15,
    "name": "Treble"
+  }, {
+   "id": "subwoofer",
+   "val": 20,
+   "type": "number",
+   "min": 0,
+   "max": 31,
+   "name": "Subwooferr"
   }, {
    "id": "mute",
    "val": 0,

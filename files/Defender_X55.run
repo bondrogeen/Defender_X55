@@ -7,7 +7,7 @@ return function (s)
    print(i2c.setup(0, 4, 3, i2c.SLOW))
   local mytimer = tmr.create()
   mytimer:register(1000, tmr.ALARM_SINGLE, function (t)
-   dofile("X55.lua")(s)
+   dofile("Defender_X55.lua")(s)
   end)
   mytimer:start()
   r=true
