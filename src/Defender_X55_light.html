@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Defender X55</title>
+  <link rel="stylesheet" href="style.css.gz" />
+  <!-- <link href="https://io.codedevice.ru/css/ws_css/iot.css" rel="stylesheet">-->
+  <style>
+    .cont {
+      margin-top: 1em;
+    }
+
+    .bor {
+      border: #00000052 1px solid;
+      border-radius: 5px;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    .group label span {
+      position: initial;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="cont">
+    <div class="row">
+      <div class="s12">
+        <h2 class="center">Defender X55</h2>
+      </div>
+
+      <div class="s12 m6 l4 of-l1 bor">
+        <div class="row">
+          <div class="s12">
+            <div class="group success">
+              <input onchange="save(this.name,this.value)" type="radio" name="mute" value="1" id="mute_on">
+              <label for="mute_on">ON</label>
+              <input onchange="save(this.name,this.value)" type="radio" name="mute" value="0" id="mute_off">
+              <label for="mute_off">OFF</label>
+              <span>Mute</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="s12 group">
+            <input type="range" min="0" max="63" id="volume" onchange="save(this.id,this.value)" value="15" />
+            <label>Volume: <span id="volumeSpan">0</span></label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="s6 group">
+            <input type="range" min="0" max="31" id="left" onchange="save(this.id,this.value)" value="31" />
+            <label>Left: <span id="leftSpan">0</span></label>
+          </div>
+          <div class="s6 group">
+            <input type="range" min="0" max="31" id="right" onchange="save(this.id,this.value)" value="31" />
+            <label>Right: <span id="rightSpan">0</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="s12 m6 l4 of-l1 bor">
+        <div class="s12 group">
+          <input id="bass" type="range" min="0" max="15" onchange="save(this.id,this.value)" value="5" />
+          <label>Bass:  <span id="bassSpan">0</span></label>
+        </div>
+        <div class="s12 group">
+          <input id="treble" type="range" min="0" max="15" onchange="save(this.id,this.value)" value="5" />
+          <label>Treble:  <span id="trebleSpan">0</span></label>
+        </div>
+        <div class="s12 group">
+          <input id="subwoofer" type="range" min="0" max="31" onchange="save(this.id,this.value)" value="5" />
+          <label>Subwoofer:  <span id="subwooferSpan">0</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var run;
+    var left;
+    var right;
+
+    function send(page, data, cb) {
+      var req = new XMLHttpRequest();
+      req.open("POST", page, true);
+      req.setRequestHeader('Content-Type', 'application/json');
+      req.addEventListener("load", function() {
+        if (req.status < 400) {
+          if (cb) cb(req.responseText);
+        } else {
+          if (cb) cb(req.status);
+        }
+      });
+      req.send(JSON.stringify(data));
+    }
+
+
+    function save(name, val) {
+      console.log(name + " : " + val);
+      if (name !== 'mute') document.getElementById(name + 'Span').innerHTML = val;
+      var d = {}
+      d[name] = val;
+      send("Defender_X55.lua", d, function(res) {
+        console.log(res);
+      });
+    }
+
+    function getSettings(info) {
+      console.log(info);
+      var list = ["bass", "treble", "left", "right", "subwoofer", "volume", "mute"];
+      list.forEach(function(item, i, arr) {
+        console.log(item + " : " + info[item])
+        if (item === "mute") {
+          var input = document.getElementsByName(item);
+          for (var i = 0; i < input.length; i++) {
+            console.log(input[i].value);
+            console.log(input[i].value == info[item]);
+            if (input[i].value == info[item]) input[i].checked = "checked";
+          }
+        } else {
+          document.getElementById(item).value = info[item];
+          document.getElementById(item + 'Span').innerHTML = info[item];
+        }
+      });
+    }
+
+    function load(name, val, pin) {
+      send("Defender_X55.init", {}, function(res) {
+        var info;
+        try {
+          info = JSON.parse(res);
+        } catch (e) {
+          console.log(e);
+          return
+        }
+        if (!info.run) {
+          run = confirm("The module is not started !!! run?");
+          if (run) {
+
+          }
+        } else {
+          getSettings(info)
+        }
+      });
+    }
+
+    load();
+
+  </script>
+</body>
+
+</html>

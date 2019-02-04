@@ -1,0 +1,11 @@
+{
+  "run": false,
+  "input": 3,
+  "volume": 20,
+  "left": 15,
+  "right": 15,
+  "subwoofer": 15,
+  "bass": 8,
+  "treble": 8,
+  "mute": 0
+  }
