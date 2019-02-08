@@ -1,11 +1,1 @@
-local function bitToNumber(str)
- local b,i=0,1
- for s in str:reverse():gmatch(".")do b=b+s*i i=i*2 end
- return b
-end
-
-return function (s)
- local r = bitToNumber(s)
-
- return r
-end
+local a={[58]={"mute",0},[216]={"mute",0},[200]={"volume",1},[232]={"volume",-1},[26]={"subwoofer",1},[154]={"subwoofer",-1},[146]={"treble",1},[178]={"treble",-1},[18]={"bass",1},[50]={"bass",-1}}local function b(c)local d,e=0,1;for f in c:reverse():gmatch(".")do d=d+f*e;e=e*2 end;return d end;return function(g)local h,i,j=b(g),{}local k=a[h]if k and _Defender then i[k[1]]=k[1]=="mute"and(_Defender[k[1]]==1 and 0 or 1)or _Defender[k[1]]+k[2]dofile("Defender_X55.lua")(i)end end

@@ -1,13 +1,1 @@
-return function (t)
-local r
- if t then 
-  _M:pub("comm/Defender_X55/volume","")
-  _M:pub("comm/Defender_X55/mute","")
-  _M:pub("comm/Defender_X55/bass","")
-  _M:pub("comm/Defender_X55/subwoofer","")
-  _M:pub("comm/Defender_X55/treble","")
-  _M:pub("comm/Defender_X55/left","")
-  _M:pub("comm/Defender_X55/right","")
- end
- return r
-end
+return function(a)local b;if a then _M:pub("Defender_X55/comm/volume","")_M:pub("Defender_X55/comm/mute","")_M:pub("Defender_X55/comm/bass","")_M:pub("Defender_X55/comm/subwoofer","")_M:pub("Defender_X55/comm/treble","")_M:pub("Defender_X55/comm/left","")_M:pub("Defender_X55/comm/right","")end;return b end

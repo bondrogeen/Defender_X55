@@ -6,31 +6,13 @@ local function set(val)
   return r
 end
 
-local function init(n)
-  local state, result
-  if file.open(n, "r") then
-    state, result = pcall(sjson.decode,file.read())
-    file.close()
-  end
-  return result
-end
-
-local function save(fname, tab)
+local function save(tab)
   local status, result = pcall(sjson.encode, tab)
-  if result and file.open(fname, "w") then
+  if result and file.open("Defender_X55.init", "w") then
     file.write(result)
     file.close()
   end
   return status
-end
-
-local function resave(menu, value)
-  local fname, settings = "Defender_X55.init"
-  settings = init(fname)
-  if settings then
-    settings[menu] = value
-    save(fname, settings)
-  end
 end
 
 local function sort(m,v)
@@ -54,21 +36,24 @@ local function sort(m,v)
   end
 
   if r then
-    resave(m,v)
+    _Defender[m] = v
+    print(m..": "..v)
+    if m == "mute" then save(_Defender)end
     if _M then
-      _M:pub("info/Defender_X55/"..m,v)
+      _M:pub("Defender_X55/info/"..m,v)
     end
   end
   return r
 end
 
-return function (t)
-  local x,d,r = {}
-  for k,v in pairs(t) do
-    d=sort(k,v)
-    if d~=nil then
-      x[k]=d r=1
+return function (data)
+  if not _Defender then return end
+  local result, state = {}
+  for key, value in pairs(data) do
+    state = sort(key, value)
+    if state ~= nil then
+      result[key] = state
     end
   end
-  return  x
+  return result
 end

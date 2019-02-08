@@ -1,16 +1,1 @@
-return function (s)
- local r
- if s.run then
- print("Module X55 is run")
-   gpio.mode(2, gpio.OUTPUT)
-   gpio.write(2, s.mute) 
-   print(i2c.setup(0, 4, 3, i2c.SLOW))
-  local mytimer = tmr.create()
-  mytimer:register(1000, tmr.ALARM_SINGLE, function (t)
-   dofile("Defender_X55.lua")(s)
-  end)
-  mytimer:start()
-  r=true
- end
- return r
-end
+return function(a)local b;if a.run then print("Module X55 is run")gpio.mode(5,gpio.OUTPUT)gpio.write(5,a.mute)gpio.mode(7,gpio.OUTPUT)gpio.write(7,a.mute==0 and 1 or 0)_Defender=a;print(i2c.setup(0,4,3,i2c.SLOW))local c=tmr.create()c:register(1000,tmr.ALARM_SINGLE,function(d)dofile("Defender_X55.lua")(a)dofile("Defender_X55_ir.lua")end)c:start()b=true end;return b end
