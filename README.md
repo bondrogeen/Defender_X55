@@ -33,7 +33,7 @@ screenshot if you've changed anything visually.
 
 ## Changelog
 
-### 0.0.3 (2018-11-23)
+### 0.0.3 (2019-02-25)
 * (bondrogeen) minor fix.
 
 ### 0.0.1 (2018-11-23)
