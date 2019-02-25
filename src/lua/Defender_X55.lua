@@ -29,7 +29,13 @@ local function sort(m,v)
   elseif m == "right" then r=(v<=31 and v>=0) and set(160+31-v)
   elseif m == "lr" then r=(v<=31 and v>=0) and set(192+31-v)
   elseif m == "subwoofer" then r=(v<=31 and v>=0) and set(224+31-v)
-  elseif m == "mute" then if (v==1 or v == 0) then gpio.write(5,v) r=v else r=false end
+  elseif m == "mute" then
+    if (v==1 or v == 0) then
+      gpio.write(5,v) r=v
+      gpio.write(7,  v == 0 and 1 or 0)
+    else
+      r=false
+    end
   elseif m == "input" then r=(v<=3 and v >= 1)and set(79+v)
   elseif m == "bass" then r=(v<=7 and v >= 0) and set(96+v) or (v <= 15 and v >= 8) and set(111+8-v)
   elseif m == "treble" then r=(v<=7 and v >= 0) and set(112+v) or (v <= 15 and v >= 8) and set(127+8-v)

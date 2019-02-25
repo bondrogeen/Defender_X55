@@ -3,6 +3,7 @@
 var gulp = require('gulp'),
  gutil = require('gulp-util'),
  gzip = require('gulp-gzip'),
+ jsonminify = require('gulp-jsonminify'),
  cssmin = require('gulp-cssmin'),
  rename = require('gulp-rename'),
  uglify = require('gulp-uglify'),
@@ -17,18 +18,18 @@ var path = {
   html: 'src/*.html',
   js: 'src/assets/js/**/*.js',
   style: 'src/assets/css/*.css',
-  img: 'src/assets/images/**/*.*',
+  img: 'src/assets/img/**/*.*',
   lua: 'src/lua/**/*.*',
-  info: 'src/assets/info/**/*.*',
+  info: 'src/info/**/*.*',
   fonts: 'src/assets/fonts/**/*.*'
  },
  watch: {
   html: 'src/**/*.html',
   js: 'src/assets/js/*.js',
   style: 'src/assets/css/*.css',
-  img: 'src/assets/images/**/*.*',
+  img: 'src/assets/img/**/*.*',
   lua: 'src/lua/**/*.*',
-  info: 'src/assets/info/**/*.*',
+  info: 'src/info/**/*.*',
   fonts: 'src/assets/fonts/**/*.*'
  },
  clean: './build'
@@ -73,6 +74,7 @@ function img() {
 
 function info() {
  return gulp.src(path.src.info)
+  .pipe(jsonminify())
   .pipe(gulp.dest(path.build));
 };
 
@@ -92,3 +94,4 @@ function watch() {
 
 gulp.task('build', gulp.parallel(html, js, style, img, info, lua));
 gulp.task('watch', gulp.series(watch));
+

@@ -138,12 +138,9 @@
           return
         }
         if (!info.run) {
-          run = confirm("The module is not started !!! run?");
-          if (run) {
-
-          }
+          run = confirm("The module is not started !!!");
         } else {
-          getSettings(info)
+          getSettings(info);
         }
       });
     }
